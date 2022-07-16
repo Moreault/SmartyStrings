@@ -52,4 +52,10 @@ public static class StringExtensions
     {
         return instance.IndexesOf(value.ToString(), comparison);
     }
+
+    public static int LastIndex(this string instance)
+    {
+        if (instance == null) throw new ArgumentNullException(nameof(instance));
+        return instance.Length - 1;
+    }
 }

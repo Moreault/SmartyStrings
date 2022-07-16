@@ -4,10 +4,17 @@
 Extension methods to make strings just a little bit smarter.
 
 ## Gettings started
-Just add
 
 ```c#
-using ToolBX.SmartyStrings;
-```
+//returns "Hello, guy What's up'"
+var newString = "Hello, guy!!! What's up!!'".RemoveAll('!');
 
-And you should be good to go. 
+//returns true
+var isNumeric = "123".IsNumeric();
+
+//returns true
+var isNumeric = "123.456".IsNumeric();
+
+//returns false
+var isNumeric = "One hundred and twenty three point four hundred and fifty six".IsNumeric();
+```
