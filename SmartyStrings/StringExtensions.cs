@@ -6,7 +6,10 @@ public static class StringExtensions
 
     public static string RemoveAll(this string value, char toRemove) => value.Replace(toRemove, '\0');
 
-    public static bool IsNumeric(this string value) => value.ToDouble().IsSuccess;
+    /// <summary>
+    /// True if the string is an integer or floating point number.
+    /// </summary>
+    public static bool IsNumeric(this string value) => double.TryParse(value, out _);
 
     public static string TrimEnd(this string value, string trimString, StringComparison comparison = StringComparison.InvariantCulture)
     {
@@ -14,7 +17,7 @@ public static class StringExtensions
         if (trimString == null) throw new ArgumentNullException(nameof(trimString));
 
         while (value.EndsWith(trimString, comparison))
-            value = value.Substring(0, value.Length - trimString.Length);
+            value = value[..^trimString.Length];
 
         return value;
     }
