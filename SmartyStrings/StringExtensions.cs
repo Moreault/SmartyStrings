@@ -2,15 +2,36 @@
 
 public static class StringExtensions
 {
-    public static string RemoveAll(this string value, string toRemove) => value.Replace(toRemove, string.Empty);
+    /// <summary>
+    /// Removes all occurences of the specified string from the current string.
+    /// </summary>
+    public static string RemoveAll(this string value, string toRemove)
+    {
+        if (value is null) throw new ArgumentNullException(nameof(value));
+        return value.Replace(toRemove, string.Empty);
+    }
 
-    public static string RemoveAll(this string value, char toRemove) => value.Replace(toRemove, '\0');
+    /// <summary>
+    /// Removes all occurences of the specified character from the current string.
+    /// </summary>
+    public static string RemoveAll(this string value, char toRemove)
+    {
+        if (value is null) throw new ArgumentNullException(nameof(value));
+        return value.Replace(toRemove.ToString(), string.Empty);
+    }
 
     /// <summary>
     /// True if the string is an integer or floating point number.
     /// </summary>
-    public static bool IsNumeric(this string value) => double.TryParse(value, out _);
+    public static bool IsNumeric(this string value)
+    {
+        if (value is null) throw new ArgumentNullException(nameof(value));
+        return double.TryParse(value, out _);
+    }
 
+    /// <summary>
+    /// Removes all occurences of the specified string from the end of the current string.
+    /// </summary>
     public static string TrimEnd(this string value, string trimString, StringComparison comparison = StringComparison.InvariantCulture)
     {
         if (value == null) throw new ArgumentNullException(nameof(value));
@@ -22,6 +43,9 @@ public static class StringExtensions
         return value;
     }
 
+    /// <summary>
+    /// Removes all occurences of the specified string from the start of the current string.
+    /// </summary>
     public static string TrimStart(this string value, string trimString, StringComparison comparison = StringComparison.InvariantCulture)
     {
         if (value == null) throw new ArgumentNullException(nameof(value));
@@ -32,6 +56,9 @@ public static class StringExtensions
         return value;
     }
 
+    /// <summary>
+    /// Returns all indexes of the specified string in the current string.
+    /// </summary>
     public static IReadOnlyList<int> IndexesOf(this string instance, string value, StringComparison comparison = StringComparison.InvariantCulture)
     {
         if (string.IsNullOrWhiteSpace(instance)) throw new ArgumentNullException(nameof(instance));
@@ -51,6 +78,9 @@ public static class StringExtensions
         return indexes;
     }
 
+    /// <summary>
+    /// Returns all indexes of the specified character in the current string.
+    /// </summary>
     public static IReadOnlyList<int> IndexesOf(this string instance, char value, StringComparison comparison = StringComparison.InvariantCulture)
     {
         return instance.IndexesOf(value.ToString(), comparison);

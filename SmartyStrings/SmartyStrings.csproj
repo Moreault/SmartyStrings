@@ -12,7 +12,7 @@
 		<PackageProjectUrl>https://github.com/Moreault/SmartyStrings</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>Extension methods to make strings just a little bit smarter.</Description>
-		<Version>2.0.1</Version>
+		<Version>2.2.0-beta1</Version>
 		<Product>ToolBX.$(AssemblyName)</Product>
 		<PackageIcon>smartystrings.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

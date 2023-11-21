@@ -1,5 +1,3 @@
-using ToolBX.SmartyStrings;
-
 namespace SmartyStrings.Tests;
 
 [TestClass]
@@ -8,19 +6,138 @@ public class StringExtensionsTester
     [TestClass]
     public class RemoveAll_String : Tester
     {
-        //TODO Test
+        [TestMethod]
+        public void WhenValueIsNull_Throw()
+        {
+            // Arrange
+            string value = null!;
+            var toRemove = Fixture.Create<string>();
+
+            // Act
+            var action = () => value.RemoveAll(toRemove);
+
+            // Assert
+            action.Should().Throw<ArgumentNullException>().WithParameterName("value");
+        }
+
+        [TestMethod]
+        public void RemoveAll_ShouldRemoveAllOccurrences_WhenValueIsNotNull()
+        {
+            // Arrange
+            var toRemove = Fixture.Create<string>();
+            var otherStuff = Fixture.Create<string>();
+            var value = $"{toRemove}{toRemove}{otherStuff}{toRemove}";
+
+            // Act
+            var result = value.RemoveAll(toRemove);
+
+            // Assert
+            result.Should().Be(otherStuff);
+        }
     }
 
     [TestClass]
     public class RemoveAll_Char : Tester
     {
-        //TODO Test
+        [TestMethod]
+        public void WhenValueIsNull_ThrowsArgumentNullException()
+        {
+            // Arrange
+            string value = null!;
+            var toRemove = Fixture.Create<char>();
+
+            // Act
+            var action = () => value.RemoveAll(toRemove);
+
+            // Assert
+            action.Should().Throw<ArgumentNullException>().WithMessage("*value*");
+        }
+
+        [TestMethod]
+        public void WhenValueIsNotNullAndContainsChar_RemovesAllOccurrencesOfChar()
+        {
+            // Arrange
+            var toRemove = Fixture.Create<char>();
+            var part1 = Fixture.Create<string>().Replace(toRemove, Fixture.Create<char>());
+            var part2 = Fixture.Create<string>().Replace(toRemove, Fixture.Create<char>());
+            var value = $"{part1}{toRemove}{part2}{toRemove}";
+
+            // Act
+            var result = value.RemoveAll(toRemove);
+
+            // Assert
+            result.Should().Be($"{part1}{part2}");
+        }
+
+        [TestMethod]
+        public void WhenValueIsNotNullAndDoesNotContainChar_ReturnsOriginalString()
+        {
+            // Arrange
+            var toRemove = Fixture.Create<char>();
+            var value = Fixture.Create<string>().Replace(toRemove, Fixture.Create<char>());
+
+            // Act
+            var result = value.RemoveAll(toRemove);
+
+            // Assert
+            result.Should().Be(value);
+        }
     }
 
     [TestClass]
     public class IsNumeric : Tester
     {
-        //TODO Test
+        [TestMethod]
+        public void WhenIsNullValue_ThrowsArgumentNullException()
+        {
+            // Arrange
+            string value = null!;
+
+            // Act
+            var action = () => value.IsNumeric();
+
+            // Assert
+            action.Should().Throw<ArgumentNullException>().WithParameterName("value");
+        }
+
+        [TestMethod]
+        public void WhenIsIntegerValue_ReturnsTrue()
+        {
+            // Arrange
+            var value = Fixture.Create<int>().ToString();
+
+            // Act
+            var result = value.IsNumeric();
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void WhenIsNonNumericValue_ReturnsFalse()
+        {
+            // Arrange
+            var value = Fixture.Create<string>();
+
+            // Act
+            var result = value.IsNumeric();
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void WhenIsFloat_ReturnTrue()
+        {
+            //Arrange
+            var value = (Fixture.Create<float>() + new Random().NextDouble()).ToString(CultureInfo.InvariantCulture);
+
+            //Act
+            var result = value.IsNumeric();
+
+            //Assert
+            result.Should().BeTrue();
+        }
     }
 
     [TestClass]
@@ -313,6 +430,42 @@ public class StringExtensionsTester
             //Assert
             result.Should().BeEquivalentTo(new List<int> { 0, 31 });
         }
+    }
+
+    [TestClass]
+    public class IndexesOf_Char : Tester
+    {
+        [TestMethod]
+        public void WhenIsNullInstance_ShouldThrowArgumentNullException()
+        {
+            // Arrange
+            string instance = null!;
+            var value = Fixture.Create<char>();
+
+            // Act
+            var action = () => instance.IndexesOf(value);
+
+            // Assert
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [TestMethod]
+        [DataRow('a', 2, 6, 16, 24, 26, 39)]
+        [DataRow('à', 31)]
+        [DataRow(' ', 4, 10, 14, 19, 22, 30, 32)]
+        public void When_ShouldReturnCorrectIndexes(char value, params int[] expected)
+        {
+            // Arrange
+            var instance = "J'ai mangé une raie de sayabec à montréal";
+
+            // Act
+            var result = instance.IndexesOf(value);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+
     }
 
     [TestClass]
