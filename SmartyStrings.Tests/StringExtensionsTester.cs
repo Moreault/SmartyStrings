@@ -459,7 +459,7 @@ public class StringExtensionsTester
             var instance = "J'ai mangé une raie de sayabec à montréal";
 
             // Act
-            var result = instance.IndexesOf(value);
+            var result = instance.IndexesOf(value, StringComparison.OrdinalIgnoreCase);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
