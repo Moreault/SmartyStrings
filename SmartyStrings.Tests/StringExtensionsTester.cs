@@ -451,7 +451,7 @@ public class StringExtensionsTester
 
         [TestMethod]
         [DataRow('a', 2, 6, 16, 24, 26, 39)]
-        [DataRow('à', 31)]
+        [DataRow('u', 12)]
         [DataRow(' ', 4, 10, 14, 19, 22, 30, 32)]
         public void When_ShouldReturnCorrectIndexes(char value, params int[] expected)
         {
@@ -459,7 +459,7 @@ public class StringExtensionsTester
             var instance = "J'ai mangé une raie de sayabec à montréal";
 
             // Act
-            var result = instance.IndexesOf(value, StringComparison.OrdinalIgnoreCase);
+            var result = instance.IndexesOf(value);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
