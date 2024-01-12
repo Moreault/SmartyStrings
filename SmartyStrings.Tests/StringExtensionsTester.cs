@@ -451,7 +451,7 @@ public class StringExtensionsTester
 
         [TestMethod]
         [DataRow('a', 2, 6, 16, 24, 26, 39)]
-        [DataRow('u', 12)]
+        [DataRow('u', 11)]
         [DataRow(' ', 4, 10, 14, 19, 22, 30, 32)]
         public void When_ShouldReturnCorrectIndexes(char value, params int[] expected)
         {
