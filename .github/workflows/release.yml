@@ -11,6 +11,10 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
+    - name: Set Locale
+      run: sudo locale-gen fr_CA.UTF-8 && sudo update-locale LANG=fr_CA.UTF-8
+    - name: Check Locale
+      run: locale
     - name: Checkout code
       uses: actions/checkout@v3
       
