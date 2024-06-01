@@ -11,7 +11,7 @@ public class StringExtensionsTester
         {
             // Arrange
             string value = null!;
-            var toRemove = Fixture.Create<string>();
+            var toRemove = Dummy.Create<string>();
 
             // Act
             var action = () => value.RemoveAll(toRemove);
@@ -24,8 +24,8 @@ public class StringExtensionsTester
         public void RemoveAll_ShouldRemoveAllOccurrences_WhenValueIsNotNull()
         {
             // Arrange
-            var toRemove = Fixture.Create<string>();
-            var otherStuff = Fixture.Create<string>();
+            var toRemove = Dummy.Create<string>();
+            var otherStuff = Dummy.Create<string>();
             var value = $"{toRemove}{toRemove}{otherStuff}{toRemove}";
 
             // Act
@@ -44,7 +44,7 @@ public class StringExtensionsTester
         {
             // Arrange
             string value = null!;
-            var toRemove = Fixture.Create<char>();
+            var toRemove = Dummy.Create<char>();
 
             // Act
             var action = () => value.RemoveAll(toRemove);
@@ -57,9 +57,9 @@ public class StringExtensionsTester
         public void WhenValueIsNotNullAndContainsChar_RemovesAllOccurrencesOfChar()
         {
             // Arrange
-            var toRemove = Fixture.Create<char>();
-            var part1 = Fixture.Create<string>().Replace(toRemove, Fixture.Create<char>());
-            var part2 = Fixture.Create<string>().Replace(toRemove, Fixture.Create<char>());
+            var toRemove = Dummy.Create<char>();
+            var part1 = Dummy.Create<string>().Replace(toRemove, Dummy.Create<char>());
+            var part2 = Dummy.Create<string>().Replace(toRemove, Dummy.Create<char>());
             var value = $"{part1}{toRemove}{part2}{toRemove}";
 
             // Act
@@ -73,8 +73,8 @@ public class StringExtensionsTester
         public void WhenValueIsNotNullAndDoesNotContainChar_ReturnsOriginalString()
         {
             // Arrange
-            var toRemove = Fixture.Create<char>();
-            var value = Fixture.Create<string>().Replace(toRemove, Fixture.Create<char>());
+            var toRemove = Dummy.Create<char>();
+            var value = Dummy.Create<string>().Replace(toRemove, Dummy.Create<char>());
 
             // Act
             var result = value.RemoveAll(toRemove);
@@ -104,7 +104,7 @@ public class StringExtensionsTester
         public void WhenIsIntegerValue_ReturnsTrue()
         {
             // Arrange
-            var value = Fixture.Create<int>().ToString();
+            var value = Dummy.Create<int>().ToString();
 
             // Act
             var result = value.IsNumeric();
@@ -117,7 +117,7 @@ public class StringExtensionsTester
         public void WhenIsNonNumericValue_ReturnsFalse()
         {
             // Arrange
-            var value = Fixture.Create<string>();
+            var value = Dummy.Create<string>();
 
             // Act
             var result = value.IsNumeric();
@@ -130,7 +130,7 @@ public class StringExtensionsTester
         public void WhenIsFloat_ReturnTrue()
         {
             //Arrange
-            var value = (Fixture.Create<float>() + new Random().NextDouble()).ToString(CultureInfo.InvariantCulture);
+            var value = (Dummy.Create<float>() + new Random().NextDouble()).ToString(CultureInfo.InvariantCulture);
 
             //Act
             var result = value.IsNumeric();
@@ -148,7 +148,7 @@ public class StringExtensionsTester
         {
             //Arrange
             string value = null!;
-            var trimString = Fixture.Create<string>();
+            var trimString = Dummy.Create<string>();
 
             //Act
             var action = () => value.TrimEnd(trimString);
@@ -161,7 +161,7 @@ public class StringExtensionsTester
         public void WhenTrimStringIsNull_Throw()
         {
             //Arrange
-            var value = Fixture.Create<string>();
+            var value = Dummy.Create<string>();
             string trimString = null!;
 
             //Act
@@ -214,8 +214,8 @@ public class StringExtensionsTester
         public void WhenFixtureEndsWithValue_TrimEnd()
         {
             //Arrange
-            var startPart = Fixture.Create<string>();
-            var endpart = Fixture.Create<string>();
+            var startPart = Dummy.Create<string>();
+            var endpart = Dummy.Create<string>();
 
             var value = startPart + endpart;
 
@@ -230,8 +230,8 @@ public class StringExtensionsTester
         public void WhenFixtureDoesNotEndWithValue_DoNotTrim()
         {
             //Arrange
-            var startPart = Fixture.Create<string>();
-            var endpart = Fixture.Create<string>();
+            var startPart = Dummy.Create<string>();
+            var endpart = Dummy.Create<string>();
 
             var value = startPart + endpart;
 
@@ -246,8 +246,8 @@ public class StringExtensionsTester
         public void WhenValueIsLargerThanString_DoNotTrimAnything()
         {
             //Arrange
-            var startPart = Fixture.Create<string>();
-            var endpart = Fixture.Create<string>() + Fixture.Create<string>();
+            var startPart = Dummy.Create<string>();
+            var endpart = Dummy.Create<string>() + Dummy.Create<string>();
 
             var value = startPart + endpart;
 
@@ -280,7 +280,7 @@ public class StringExtensionsTester
         {
             //Arrange
             string value = null!;
-            var trimString = Fixture.Create<string>();
+            var trimString = Dummy.Create<string>();
 
             //Act
             Action action = () => value.TrimStart(trimString);
@@ -293,7 +293,7 @@ public class StringExtensionsTester
         public void WhenTrimStringIsNull_Throw()
         {
             //Arrange
-            var value = Fixture.Create<string>();
+            var value = Dummy.Create<string>();
             string trimString = null!;
 
             //Act
@@ -366,7 +366,7 @@ public class StringExtensionsTester
         public void WhenInstanceIsEmpty_Throw(string instance)
         {
             //Arrange
-            var value = Fixture.Create<string>();
+            var value = Dummy.Create<string>();
 
             //Act
             Action action = () => instance.IndexesOf(value);
@@ -381,7 +381,7 @@ public class StringExtensionsTester
         public void WhenValueIsNullOrEmpty_Throw(string value)
         {
             //Arrange
-            var instance = Fixture.Create<string>();
+            var instance = Dummy.Create<string>();
 
             //Act
             Action action = () => instance.IndexesOf(value);
@@ -394,7 +394,7 @@ public class StringExtensionsTester
         public void WhenValueIsWhiteSpace_DoNotThrow()
         {
             //Arrange
-            var instance = Fixture.Create<string>();
+            var instance = Dummy.Create<string>();
 
             //Act
             Action action = () => instance.IndexesOf(" ");
@@ -440,7 +440,7 @@ public class StringExtensionsTester
         {
             // Arrange
             string instance = null!;
-            var value = Fixture.Create<char>();
+            var value = Dummy.Create<char>();
 
             // Act
             var action = () => instance.IndexesOf(value);
