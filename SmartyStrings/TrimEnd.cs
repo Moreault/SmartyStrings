@@ -7,8 +7,8 @@ public static partial class StringExtensions
     /// </summary>
     public static string TrimEnd(this string value, string trimString, StringComparison comparison = StringComparison.InvariantCulture)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
-        if (trimString == null) throw new ArgumentNullException(nameof(trimString));
+        if (value is null) throw new ArgumentNullException(nameof(value));
+        if (trimString is null) throw new ArgumentNullException(nameof(trimString));
 
         if (string.IsNullOrEmpty(trimString)) return value;
         while (value.EndsWith(trimString, comparison))

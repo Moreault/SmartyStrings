@@ -1,5 +1,6 @@
 ﻿namespace SmartyStrings.Tests;
 
+[TestClass]
 public sealed class IsNumericTests : Tester
 {
     [TestMethod]
