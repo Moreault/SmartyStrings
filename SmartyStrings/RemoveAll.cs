@@ -7,8 +7,8 @@ public static partial class StringExtensions
     /// </summary>
     public static string RemoveAll(this string value, string toRemove, StringComparison comparison = StringComparison.InvariantCulture)
     {
-        if (value is null) throw new ArgumentNullException(nameof(value));
-        if (toRemove is null) throw new ArgumentNullException(nameof(toRemove));
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+        ArgumentException.ThrowIfNullOrWhiteSpace(toRemove);
         return value.Replace(toRemove, string.Empty, comparison);
     }
 
@@ -17,7 +17,7 @@ public static partial class StringExtensions
     /// </summary>
     public static string RemoveAll(this string value, char toRemove, StringComparison comparison = StringComparison.InvariantCulture)
     {
-        if (value is null) throw new ArgumentNullException(nameof(value));
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
         return value.Replace(toRemove.ToString(), string.Empty, comparison);
     }
 }
