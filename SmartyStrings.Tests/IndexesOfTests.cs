@@ -4,19 +4,32 @@
 public sealed class IndexesOfTests : Tester
 {
     [TestMethod]
-    [DataRow("")]
-    [DataRow(" ")]
-    [DataRow(null)]
-    public void WithString_WhenInstanceIsEmpty_Throw(string instance)
+    public void WithString_WhenInstanceIsNull_Throw()
     {
         //Arrange
+        string instance = null!;
         var value = Dummy.Create<string>();
 
         //Act
         Action action = () => instance.IndexesOf(value);
 
         //Assert
-        action.Should().Throw<ArgumentNullException>();
+        action.Should().Throw<ArgumentNullException>().WithParameterName("instance");
+    }
+
+    [TestMethod]
+    [DataRow("")]
+    [DataRow(" ")]
+    public void WithString_WhenInstanceIsEmptyOrWhiteSpace_ReturnEmpty(string instance)
+    {
+        //Arrange
+        var value = Dummy.Create<string>();
+
+        //Act
+        var result = instance.IndexesOf(value);
+
+        //Assert
+        result.Should().BeEmpty();
     }
 
     [TestMethod]

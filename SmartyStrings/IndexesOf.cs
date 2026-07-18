@@ -7,7 +7,7 @@ public static partial class StringExtensions
     /// </summary>
     public static IReadOnlyList<int> IndexesOf(this string instance, string value, StringComparison comparison = StringComparison.InvariantCulture)
     {
-        if (string.IsNullOrWhiteSpace(instance)) throw new ArgumentNullException(nameof(instance));
+        if (instance is null) throw new ArgumentNullException(nameof(instance));
         if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
 
         var minIndex = instance.IndexOf(value, comparison);
@@ -30,11 +30,5 @@ public static partial class StringExtensions
     public static IReadOnlyList<int> IndexesOf(this string instance, char value, StringComparison comparison = StringComparison.InvariantCulture)
     {
         return instance.IndexesOf(value.ToString(), comparison);
-    }
-
-    public static int LastIndex(this string instance)
-    {
-        if (instance == null) throw new ArgumentNullException(nameof(instance));
-        return instance.Length - 1;
     }
 }

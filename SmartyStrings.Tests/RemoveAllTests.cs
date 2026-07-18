@@ -18,6 +18,20 @@ public sealed class RemoveAllTests : Tester
     }
 
     [TestMethod]
+    public void WithString_WhenToRemoveIsNull_Throw()
+    {
+        // Arrange
+        var value = Dummy.Create<string>();
+        string toRemove = null!;
+
+        // Act
+        var action = () => value.RemoveAll(toRemove);
+
+        // Assert
+        action.Should().Throw<ArgumentNullException>().WithParameterName("toRemove");
+    }
+
+    [TestMethod]
     public void WithString_ShouldRemoveAllOccurrences_WhenValueIsNotNull()
     {
         // Arrange
@@ -51,8 +65,10 @@ public sealed class RemoveAllTests : Tester
     {
         // Arrange
         var toRemove = Dummy.Create<char>();
-        var part1 = Dummy.Create<string>().Replace(toRemove, Dummy.Create<char>());
-        var part2 = Dummy.Create<string>().Replace(toRemove, Dummy.Create<char>());
+        char replacement;
+        do { replacement = Dummy.Create<char>(); } while (replacement == toRemove);
+        var part1 = Dummy.Create<string>().Replace(toRemove, replacement);
+        var part2 = Dummy.Create<string>().Replace(toRemove, replacement);
         var value = $"{part1}{toRemove}{part2}{toRemove}";
 
         // Act
@@ -67,7 +83,9 @@ public sealed class RemoveAllTests : Tester
     {
         // Arrange
         var toRemove = Dummy.Create<char>();
-        var value = Dummy.Create<string>().Replace(toRemove, Dummy.Create<char>());
+        char replacement;
+        do { replacement = Dummy.Create<char>(); } while (replacement == toRemove);
+        var value = Dummy.Create<string>().Replace(toRemove, replacement);
 
         // Act
         var result = value.RemoveAll(toRemove);
